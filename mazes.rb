@@ -14,22 +14,28 @@ class Maze
 	end
 
 	def load(arg)
-		puts arg.length
 		arg.each_char do |digit|
 			@array << digit
 		end
-		puts @array.length
 	end
 
 	def make_maze
-		k = 0
-			for i in 0 ..@height*2
-				for j in 0 ..@width*2
-					@maze[i][j] = @array[k]
-					k += 1
-				end
+	k = 0
+		for i in 0 ..@height*2
+			for j in 0 ..@width*2
+				@maze[i][j] = @array[k]
+				k += 1
 			end
-		p maze
+		end
+	end
+
+	def show_maze
+		for i in 0 ..@height*2 
+			for k in 0 ..@width*2
+			print @maze[i][k]
+			end
+			puts ""
+		end
 	end
 
 end
