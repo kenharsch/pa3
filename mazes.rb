@@ -4,7 +4,7 @@
 
 class Maze
 
-	attr_reader :array, :n, :m, :maze
+	attr_reader :array, :n, :m, :maze, :check_values
 
 	def initialize (n, m)
 		@width = n 
@@ -42,8 +42,28 @@ class Maze
 		return @maze[x][y]
 	end
 
+	def check(a, b)
+		check_values = []
+		check_values[0] = get_value(a - 1, b)
+		check_values[1] = get_value(a + 1, b)
+		check_values[2] = get_value(a, b - 1)
+		check_values[3] = get_value(a, b + 1)
+		return check_values
+	end
+
 	def solve(begX, begY, endX, endY)
-		
+		if get_value(begX, begY) == 1 || get_value(endX, endY) == 1
+			puts "Invalid starting or ending point"
+			return
+		end
+		trace = []
+		last  = (begX, begY)
+		can_move = true
+		while can_move == true
+			
+
+		end
+
 
 	end
 
