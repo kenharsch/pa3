@@ -38,4 +38,17 @@ class Maze
 		end
 	end
 
+	def get_value(x, y)
+		return @maze[x][y]
+	end
+
+	def solve(begX, begY, endX, endY)
+		
+
+	end
+
+	def trace(begX, begY, endX, endY)
+
+	end
+
 end
