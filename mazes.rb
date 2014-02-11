@@ -18,21 +18,15 @@ class Maze
 			@array << digit
 		end
 	end
+	
 	#fills the maze by iterating through rows and cols
 	def make_maze
 	k = 0
 		for i in 0 ..@height*2
 			for j in 0 ..@width*2
 				@maze[i][j] = @array[k]
+				print @maze[i][j]
 				k += 1
-			end
-		end
-	end
-
-	def show_maze
-		for i in 0 ..@height*2 
-			for k in 0 ..@width*2
-			print @maze[i][k]
 			end
 			puts ""
 		end
@@ -41,19 +35,16 @@ class Maze
 	def get_value(x, y)
 		return @maze[x][y]
 	end
+
 	#takes the coords of a node, returns array of adjacent values
 	def check(x, y)
-		check_values = []
-		check_values[0] = get_value(x - 1, y)
-		check_values[1] = get_value(x + 1, y)
-		check_values[2] = get_value(x, y - 1)
-		check_values[3] = get_value(x, y + 1)
+		check_values = [get_value(x - 1, y), get_value(x + 1, y), get_value(x, y - 1), get_value(x, y + 1)]
 		return check_values
 	end
+
 	#solve algorithm uses stack to push and pop locations
 	def solve(begX, begY, endX, endY)
 		start = [begX, begY]
-		finish = [endX, endY]
 		stack = []
 		move_trace = []
 		#checks to see if start or end have "wall" value
@@ -65,7 +56,7 @@ class Maze
 		move_trace.push(start)
 		while !stack.empty?
 			current = stack.pop()
-			if current == finish
+			if current == [endX, endY]
 				puts "The maze is solved"
 				puts "The cells you visited are: "
 				return move_trace
@@ -85,27 +76,24 @@ class Maze
 	def trace(node)
 		x = node[0]
 		y = node[1]
-
 		open_moves = []
 		values = check(x, y)
-		if values[0] == "0"
-			temp = [node[0] - 1, node[1]]
-			open_moves.push temp
-		end
-
-		if values[1] == "0"
-			temp = [node[0] + 1, node[1]]
-			open_moves.push temp
-		end
-
-		if values[2] == "0"
-			temp = [node[0], node[1] - 1]
-			open_moves.push temp
-		end
-
-		if values[3] == "0"
-			temp = [node[0], node[1] + 1]
-			open_moves.push temp
+		
+		values.each_index do |index|
+			values.each do |value|
+				if value == "0" && index == 0
+					open_moves.push [x - 1, y]
+				end
+				if value == "0" && index == 1
+					open_moves.push [x + 1, y]
+				end
+				if value == "0" && index == 2
+					open_moves.push [x, y - 1]
+				end
+				if value == "0" && index == 3
+					open_moves.push [x, y + 1]
+				end
+			end
 		end
 		return open_moves
 	end
