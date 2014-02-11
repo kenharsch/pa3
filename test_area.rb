@@ -13,4 +13,4 @@ m.show_maze
 #p m.get_value(2, 6)
 puts "m check 44 = "
 p m.check(4, 3)
-m.solve(4, 3, 6, 4)
+p m.solve(4, 3, 6, 4)
